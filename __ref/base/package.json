@@ -1,0 +1,17 @@
+{
+	"name": "floz",
+	"version": "0.1",
+	"description": "base project for a SOTM",
+	"author": "Florian Zumbrunn - Floz",
+	"homepage": "http://www.floz.fr",
+	"engine": {
+		"node": "0.8.x",
+		"npm": "1.2.x"
+	},
+	"dependencies": {
+		"grunt-contrib-watch": "*",
+		"grunt-contrib-stylus": "*",
+		"grunt-contrib-jade": "*",
+		"grunt-contrib-coffee": "*"
+	}
+}
