@@ -19,7 +19,7 @@ module.exports = function ( grunt ) {
 	} );
 
 	function grabFilesToWatch() {
-		var baseCoffee = "./grunt/coffeescript/";
+		var baseCoffee = "./src/coffee/";
 		coffeesToWatch = [ baseCoffee + "*.coffee" ];
 		grunt.file.recurse( baseCoffee, function(abspath, rootdir, subdir, filename) {
 			if( subdir == undefined )
@@ -27,7 +27,7 @@ module.exports = function ( grunt ) {
 			coffeesToWatch[ coffeesToWatch.length ] = baseCoffee + subdir + "/*.coffee";
 		});
 
-		filesToWatch = [ "GruntFile.js", "src/stylus/*.styl", "src/jade/*.jade" ];
+		filesToWatch = [ "GruntFile.js", "./src/stylus/*.styl", "./src/jade/*.jade" ];
 		filesToWatch = filesToWatch.concat( coffeesToWatch );
 	}
 
@@ -43,11 +43,11 @@ module.exports = function ( grunt ) {
 			stylus: {
 				compile: {
 					files: {
-						"deploy/css/reset.css": "src/stylus/reset.styl",
-						"deploy/css/main.css": "src/stylus/main.styl",
+						"./deploy/css/reset.css": "./src/stylus/reset.styl",
+						"./deploy/css/main.css": "./src/stylus/main.styl",
 					}
 				}
-			}
+			},
 
 			jade: {
 				compile: {
@@ -57,10 +57,10 @@ module.exports = function ( grunt ) {
 						}
 					},
 					files: {
-						"deploy/index.html": "src/jade/index.jade"
+						"./deploy/index.html": "./src/jade/index.jade"
 					}
 				}
-			}
+			},
 
 			coffee: {
 				compile: {
@@ -68,7 +68,7 @@ module.exports = function ( grunt ) {
 						bare: true
 					},
 					files: {
-						"html/js/main.min.js" : coffeesToWatch
+						"./deploy/js/main.min.js" : coffeesToWatch
 					}
 				}
 			}
