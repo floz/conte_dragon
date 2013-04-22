@@ -17,7 +17,9 @@ class Main
         @_main = document.getElementById "main"
 
         @_camera = new THREE.PerspectiveCamera 45, window.innerWidth / window.innerHeight, 1, 2000
-        @_camera.position.z = 100
+        @_camera.position.set 2, 2, 3
+        @_camera.aspect = window.innerWidth / window.innerHeight
+        @_camera.updateProjectionMatrix()
 
         @_scene = new THREE.Scene()
         @_createGrid()
@@ -43,13 +45,13 @@ class Main
             color: 0x303030
 
         size = 14
-        x = -size
-        for i in [ 0..size ]
-            x += i
-            geometry.vertices.push new THREE.Vector3( -size, -.04, x )
-            geometry.vertices.push new THREE.Vector3( size, -.04, x )
-            geometry.vertices.push new THREE.Vector3( x, -.04, -size )
-            geometry.vertices.push new THREE.Vector3( x, -.04, size )
+        x = -size - 1
+        for i in [ 0..size*2 ]
+            x += 1
+            geometry.vertices.push new THREE.Vector3 -size, -0.04, x
+            geometry.vertices.push new THREE.Vector3 size, -0.04, x
+            geometry.vertices.push new THREE.Vector3 x, -0.04, -size
+            geometry.vertices.push new THREE.Vector3 x, -0.04, size
 
         line = new THREE.Line geometry, material, THREE.LinePieces
         @_scene.add line
@@ -65,6 +67,8 @@ class Main
         @_camera.position.x = Math.sin( timer * 4 ) * 3009
         @_camera.position.y = Math.cos( timer * 5 ) * 4000
         @_camera.position.z = Math.cos( timer * 4 ) * 3009
+
+        @_camera.lookAt @_scene.position
 
         @_renderer.render @_scene, @_camera 
 
