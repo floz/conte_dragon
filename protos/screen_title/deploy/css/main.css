@@ -1,0 +1,11 @@
+@font-face{font-family:'Cinzel Decorative',cursive;font-style:normal;src:url("fonts/CinzelDecorative-Regular.ttf")}
+@font-face{font-family:'PT Sans',sans-serif;font-style:normal;src:url("fonts/PT_Sans-Web-Regular.ttf")}
+@font-face{font-family:'archiveregular';font-style:normal;font-weight:normal;src:url("fonts/archive-webfont.eot?#iefix") format('embedded-opentype'),url("fonts/archive-webfont.woff") format('woff'),url("fonts/archive-webfont.ttf") format('truetype'),url("fonts/archive-webfont.svg#archiveregular") format('svg')}
+html,body{width:100%;height:100%}
+body{background:-webkit-gradient(linear, left top, left bottom, color-stop(0, #163254), color-stop(1, #194e68));background:-webkit-linear-gradient(top, #163254 0, #194e68 100%);background:-moz-linear-gradient(top, #163254 0, #194e68 100%);background:-o-linear-gradient(top, #163254 0, #194e68 100%);background:-ms-linear-gradient(top, #163254 0, #194e68 100%);background:linear-gradient(top, #163254 0, #194e68 100%)}
+.title{position:relative;top:165px;color:#fff;text-align:center}
+.title_name{position:relative}
+.title__name--head{text-transform:uppercase;font-size:18px;font-family:'archiveregular';letter-spacing:1px}
+.title__name--content{font-size:100px;font-family:'Cinzel Decorative'}
+.title__subtitle{font-family:'PT Sans';font-size:36px}
+.title__separator{position:relative;top:20px;margin:0 auto;background-color:#fff;width:12px;height:2px}
