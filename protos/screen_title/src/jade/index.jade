@@ -6,24 +6,45 @@ html
     meta(name="viewport", content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width")
     title Conte Dragon
     link(rel='stylesheet', href='./css/reset.css')
+    link(rel='stylesheet', href='./css/drop_splash.css')
     link(rel='stylesheet', href='./css/main.css')
-body        
-  .title
-    .title__name
-      .title__name--head the
-      .title__name--content Dragon Bride
-    .title__subtitle “ドラゴンの花嫁
-    .title__separator
+body
 
-  .credits
-    .credits__title
-    .credits__authors
+  .main_content
+    #raindrop
+      .raindrop
+    .title
+      .title__name
+        .title__name__head the
+        .title__name__content Dragon Bride
+      .title__subtitle.asiat “ドラゴンの花嫁
+      .title__separator
 
-  script(src='./js/vendors/dat.gui.min.js')
-  script(src='./js/vendors/three.min.js')
-  script(src='./js/vendors/signals.min.js')
-  script(src='./js/vendors/TweenMax.min.js')
+    .credits
+      .credits__title Produced by
+      .credits__authors
+        a(href='http://cargocollective.com/filsdegraphiste') FilsDeGraphiste
+        |  & 
+        a(href='http://www.floz.fr') Floz
+
+    a(href='#').buttons-play
+      span.buttons-play__title.buttons-play__title--head.asiat 遊ぶ
+      span.buttons-play__title.buttons-play__title--content Play
+
+    #splash
+
+    .language
+      .language__title 
+        | Choose
+        br
+        | Your language
+      .language__buttons
+        a(href='#')#language__buttons--en.language__buttons__button.selected EN
+        a(href='#')#language__buttons--fr.language__buttons__button.last FR
+
+    #lightbubbles
+
+  script(src='./js/vendors/requestAnimationFrame.js')
+  script(src='./js/vendors/greensock/TweenMax.min.js')
+  script(src='./js/vendors/jquery-1.9.1.min.js')
   script(src='./js/main.min.js')
-
-  script
-      document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')

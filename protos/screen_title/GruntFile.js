@@ -27,6 +27,8 @@ module.exports = function ( grunt ) {
 			coffeesToWatch[ coffeesToWatch.length ] = baseCoffee + subdir + "/*.coffee";
 		});
 
+		coffeesToWatch.reverse();
+
 		filesToWatch = [ "GruntFile.js", "./src/stylus/*.styl", "./src/jade/*.jade" ];
 		filesToWatch = filesToWatch.concat( coffeesToWatch );
 	}

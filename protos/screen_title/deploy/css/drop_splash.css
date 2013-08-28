@@ -1,0 +1,42 @@
+/* ----------------------------------------------------
+   created with http://www.texturepacker.com 
+   ----------------------------------------------------
+   $TexturePacker:SmartUpdate:cc1f072f578e622a2e8aa611497f0a20$
+   ----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(../img/drop_splash.png);}
+
+.drop_splash--00000 {width:68px; height:304px; background-position: -842px -2px;}
+.drop_splash--00001 {width:68px; height:304px; background-position: -772px -2px;}
+.drop_splash--00002 {width:68px; height:304px; background-position: -702px -2px;}
+.drop_splash--00003 {width:68px; height:304px; background-position: -632px -2px;}
+.drop_splash--00004 {width:68px; height:304px; background-position: -562px -2px;}
+.drop_splash--00005 {width:68px; height:304px; background-position: -492px -2px;}
+.drop_splash--00006 {width:68px; height:304px; background-position: -422px -614px;}
+.drop_splash--00007 {width:68px; height:304px; background-position: -422px -308px;}
+.drop_splash--00008 {width:68px; height:304px; background-position: -422px -2px;}
+.drop_splash--00009 {width:68px; height:304px; background-position: -352px -614px;}
+.drop_splash--00010 {width:68px; height:304px; background-position: -352px -308px;}
+.drop_splash--00011 {width:68px; height:304px; background-position: -352px -2px;}
+.drop_splash--00012 {width:68px; height:304px; background-position: -282px -614px;}
+.drop_splash--00013 {width:68px; height:304px; background-position: -282px -308px;}
+.drop_splash--00014 {width:68px; height:304px; background-position: -282px -2px;}
+.drop_splash--00015 {width:68px; height:304px; background-position: -212px -614px;}
+.drop_splash--00016 {width:68px; height:304px; background-position: -212px -308px;}
+.drop_splash--00017 {width:68px; height:304px; background-position: -212px -2px;}
+.drop_splash--00018 {width:68px; height:304px; background-position: -142px -614px;}
+.drop_splash--00019 {width:68px; height:304px; background-position: -142px -308px;}
+.drop_splash--00020 {width:68px; height:304px; background-position: -142px -2px;}
+.drop_splash--00021 {width:68px; height:304px; background-position: -72px -614px;}
+.drop_splash--00022 {width:68px; height:304px; background-position: -72px -308px;}
+.drop_splash--00023 {width:68px; height:304px; background-position: -72px -2px;}
+.drop_splash--00024 {width:68px; height:304px; background-position: -2px -614px;}
+.drop_splash--00025 {width:68px; height:304px; background-position: -2px -308px;}
+.drop_splash--00026 {width:68px; height:304px; background-position: -2px -2px;}
+.drop_splash--00027 {width:68px; height:304px; background-position: -842px -2px;}
