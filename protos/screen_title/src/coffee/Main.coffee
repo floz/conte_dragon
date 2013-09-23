@@ -9,13 +9,12 @@ class Main
         @_raindrops = new Raindrops()
         @_raindrops.start()
 
-        # @_lightBubbles = new LightBubbles()
+        # @_dropSplashs = new DropSplashs()
+        # @_dropSplashs.start()
 
-        @_dropSplashs = new DropSplashs()
-        @_dropSplashs.start()
-
-        $( window ).focus @_onFocusGain
-        $( window ).blur @_onFocusLost
+        $window = $( window )
+        $window.focus @_onFocusGain
+        $window.blur @_onFocusLost
 
     _onFocusGain: =>
     	@_raindrops.start()

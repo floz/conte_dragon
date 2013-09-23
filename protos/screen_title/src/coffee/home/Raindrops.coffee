@@ -1,12 +1,16 @@
 class Raindrops
 
-	_cnt: null
+	_canvas: null
+	_ctx: null
 	_drops: null
+
 	_timeout: 0
 	_rafId: 0
 
 	constructor: ->
-		@_cnt = document.getElementById "raindrop"
+		@_canvas = document.getElementById "#raindrop"
+		@_ctx = @_canvas.getContext "2d"
+		
 		@_drops = []
 
 	start: ->
@@ -28,7 +32,6 @@ class Raindrops
 		for i in [0...count]
 			drop = new Raindrop()
 			@_drops.push drop
-			@_cnt.appendChild drop.body
 		@_startTimer()
 
 	_update: => 
@@ -37,36 +40,29 @@ class Raindrops
 			drop = @_drops[ i ]
 			drop.update()
 			if drop.body.offsetTop > window.innerHeight
-				@_cnt.removeChild drop.body
 				@_drops.splice i, 1
 
 		@_rafId = requestAnimationFrame @_update
 
 class Raindrop
 
-	body: null
+	x: 0.0
+	y: 0.0
+	w: 0.0
+	h: 0.0
+
 	_size: 0.0
-	_height: 0.0
 	_heightMax: 0.0
 	_speed: 2.0
 	_speedMax: 0.0
 
 	constructor: ->
-		@body = document.createElement "div"
-		@body.className = "raindrop"
-		@body.style.left = Math.random() * window.innerWidth + "px"
-		@body.style.opacity = .2 + Math.random() * .8
-
 		@_heightMax = 50.0 + Math.random() * 200.0
 		@_speedMax = 8.0 + Math.random() * 14.0
 
 	update: ->
-		py = @body.offsetTop
-		py = 0 if py == ""
-
-		@_height += ( @_heightMax - @_height ) * .03
+		@h += ( @_heightMax - @h ) * .03
 		@_speed += ( @_speedMax - @_speed ) * .1
 
-		@body.style.top = py + @_speed + "px"
-		@body.style.height = @_height + "px"
+		@y += @_speed
 

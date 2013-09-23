@@ -10,41 +10,42 @@ html
     link(rel='stylesheet', href='./css/main.css')
 body
 
-  .main_content
-    #raindrop
-      .raindrop
-    .title
-      .title__name
-        .title__name__head the
-        .title__name__content Dragon Bride
-      .title__subtitle.asiat “ドラゴンの花嫁
-      .title__separator
+  .main
+    .main__background
+    canvas#raindrop(width="100%", height="100%")
+    .main__content
+      .title
+        .title__name
+          .title__name__head the
+          .title__name__content Dragon Bride
+        .title__subtitle.asiat "ドラゴンの花嫁
+        .title__separator
 
-    .credits
-      .credits__title Produced by
-      .credits__authors
-        a(href='http://cargocollective.com/filsdegraphiste') FilsDeGraphiste
-        |  & 
-        a(href='http://www.floz.fr') Floz
+      .credits
+        .credits__title Produced by
+        .credits__authors
+          a(href='http://cargocollective.com/filsdegraphiste') FilsDeGraphiste
+          |  & 
+          a(href='http://www.floz.fr') Floz
 
-    a(href='#').buttons-play
-      span.buttons-play__title.buttons-play__title--head.asiat 遊ぶ
-      span.buttons-play__title.buttons-play__title--content Play
+      a(href='#').buttons-play
+        span.buttons-play__title.buttons-play__title--head.asiat 遊ぶ
+        span.buttons-play__title.buttons-play__title--content Play
 
-    #splash
+      #splash
 
-    .language
-      .language__title 
-        | Choose
-        br
-        | Your language
-      .language__buttons
-        a(href='#')#language__buttons--en.language__buttons__button.selected EN
-        a(href='#')#language__buttons--fr.language__buttons__button.last FR
+      .language
+        .language__title 
+          | Choose
+          br
+          | Your language
+        .language__buttons
+          a(href='#')#language__buttons--en.language__buttons__button.selected EN
+          a(href='#')#language__buttons--fr.language__buttons__button.last FR
 
-    #lightbubbles
+    //- #lightbubbles
 
   script(src='./js/vendors/requestAnimationFrame.js')
   script(src='./js/vendors/greensock/TweenMax.min.js')
-  script(src='./js/vendors/jquery-1.9.1.min.js')
+  script(src='./js/vendors/jquery-1.10.2.min.js')
   script(src='./js/main.min.js')

@@ -44,6 +44,9 @@ module.exports = function ( grunt ) {
 
 			stylus: {
 				compile: {
+					options: {
+						compress: false
+					},
 					files: {
 						"./deploy/css/reset.css": "./src/stylus/reset.styl",
 						"./deploy/css/main.css": "./src/stylus/main.styl"
@@ -54,6 +57,7 @@ module.exports = function ( grunt ) {
 			jade: {
 				compile: {
 					options: {
+						pretty: true,
 						data: {
 							debug: true
 						}
