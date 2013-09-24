@@ -4,7 +4,7 @@ html, body {
 }
 
 .asiat {
-  font-family: 'Cinzel Decorative', cursive;
+  font-family: 'Cinzel Decorative';
 }
 
 .main {
@@ -75,7 +75,7 @@ html, body {
 }
 
 
-.button-play {
+.bt-play {
   display: block;
   margin: 20px auto 0;
   color: #fff;
@@ -84,11 +84,11 @@ html, body {
   text-decoration: none;
 }
 
-.button-play span {
+.bt-play span {
   display: block;
 }
 
-.button-play__drop {
+.bt-play__drop {
   position: absolute;
 }
 
@@ -96,16 +96,16 @@ html, body {
   position: absolute;
 }
 
-.button-play__title {
+.bt-play__title {
   position: relative;
   top: 70px;
 }
 
-.button-play__title__head {
+.bt-play__title__head {
   font-size: 36px;
 }
 
-.button-play__title__content {
+.bt-play__title__content {
   font-family: 'archiveregular';
   font-size: 18px;
 }

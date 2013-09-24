@@ -8,11 +8,15 @@
 
     <title>The Dragon Bride</title>
 
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/fonts.css">
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="stylesheet" href="./css/main.css" />
 
-    <script src=""></script>
+    <script src="js/vendors/jquery-1.10.2.min.js"></script>
+    <script src="js/vendors/requestAnimationFrame.js"></script>
+    <script src="js/NormalMapEffect.js"></script>
+    <script src="js/WaterDrop.js"></script>
+    <script src="js/Main.js"></script>
   </head>
 
   <body>
@@ -39,14 +43,14 @@
           </div>
         </div>
 
-        <a href="#" class="button-play">
-          <span class="button-play__drop">
+        <a href="#" class="bt-play">
+          <span id="cnt-drop" class="bt-play__drop">
             <img src="./img/drop_bg.png" id="drop_bg" class="drop" width="131" height="160"/>
             <img src="./img/drop_reflects.png" id="drop_reflects" class="drop" width="131" height="160"/>
           </span>
-          <span class="button-play__title">
-            <span class="button-play__title__head asiat">遊ぶ</span>
-            <span class="button-play__title__content">Play</span>
+          <span class="bt-play__title">
+            <span class="bt-play__title__head asiat">遊ぶ</span>
+            <span class="bt-play__title__content">PLAY</span>
           </span>
         </a>
       </div>
