@@ -100,7 +100,7 @@ var NormalMapEffect = ( function NormalMapEffect() {
 				intensity = spec + 0.5;
 
 				for( idxChannel = 0; idxChannel < 3; idxChannel++ ) {
-					data[ idxData++ ] = Math.round( clamp( _dataTexture[ idxData ] * intensity, 0, 255 ) );
+					data[ idxData++ ] = Math.round( _clamp( _dataTexture[ idxData ] * intensity, 0, 255 ) );
 				}
 				idxData++;
 			}
@@ -108,7 +108,7 @@ var NormalMapEffect = ( function NormalMapEffect() {
 		_ctx.putImageData( imgData, 0, 0 );
 	}
 
-	function clamp( x, min, max ) {
+	function _clamp( x, min, max ) {
 		if ( x < min ) return min;
 		if ( x  > max ) return max - 1;
 		return x;
