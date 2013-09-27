@@ -39,7 +39,7 @@ var NormalMapEffect = ( function NormalMapEffect() {
 		var nx = 0, ny = 0, nz = 0
 		,	magInv = 0
 		,	i = 0, n = _w * _h * 4;
-		for( ; i < n; i++ ) {
+		for( ; i < n; i += 4 ) {
 			nx = _dataNormal[ i ];
 			ny = 255 - _dataNormal[ i + 1 ];
 			nz = _dataNormal[ i + 2 ];
@@ -76,13 +76,13 @@ var NormalMapEffect = ( function NormalMapEffect() {
 		var x = 0, y = 0
 		,	vx = 0.0, vy = 0.0, vz = 0.0
 		,	dx = 0.0, dy = 0.0, dz = 0.0
-		,	dot = 0.0, spec = 0.0, intensity = 0.0
+		,	dot = 0.0, spec = 0.0, intensity = 0.0, magInv = 0.0
 		,	idxNormals = 0, idxData = 0, idxChannel = 0;
 		for( ; y < _h; y++ ) {
 			for( x = 0; x < _w; x++ ) {
-				vx = _normals[ idxNormals ];
-				vy = _normals[ ++idxNormals ];
-				vz = _normals[ ++idxNormals ];
+				vx = _normals[ idxNormals++ ];
+				vy = _normals[ idxNormals++ ];
+				vz = _normals[ idxNormals++ ];
 
 				if( shiny > 0 || idxNormals & 1 == 0 ) {
 					dx = lx - x;
@@ -100,7 +100,7 @@ var NormalMapEffect = ( function NormalMapEffect() {
 				intensity = spec + 0.5;
 
 				for( idxChannel = 0; idxChannel < 3; idxChannel++ ) {
-					data[ idxData++ ] = Math.round( _clamp( _dataTexture[ idxData ] * intensity, 0, 255 ) );
+					data[ idxData ] = Math.round( _clamp( _dataTexture[ idxData++ ] * intensity, 0, 255 ) );
 				}
 				idxData++;
 			}
