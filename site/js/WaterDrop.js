@@ -52,14 +52,14 @@ var WaterDrop = WaterDrop || ( function WaterDrop() {
     function _createNormalMapEffect() {
         _imgNormalMap = new Image();
         _imgNormalMap.addEventListener( "load", _onNormalMapLoaded, true );
-        _imgNormalMap.src = "./img/normal_map2a.png";
+        _imgNormalMap.src = "./img/normal_map_4.png";
     }
 
     function _onNormalMapLoaded() {
         _imgNormalMap.removeEventListener( "load", _onNormalMapLoaded, true );
 
         _normalMapEffect = new NormalMapEffect( _ctx, _imgDropBg, _imgNormalMap, _w, _h );
-        _normalMapEffect.config( 1, 1, 90 );
+        _normalMapEffect.config( 1, 1.5, 90 );
 
         window.onmousemove = _render;
     }
@@ -69,6 +69,14 @@ var WaterDrop = WaterDrop || ( function WaterDrop() {
         ,   cy = e.clientY - ( _winH - 160 ) * .5;
 
         _normalMapEffect.apply( cx, cy, 500 );
+
+        var dx = ( e.clientX - _winW * .5 )
+        ,   alpha = Math.max( 0, Math.min( dx < 0 ? 0 : dx / 300, 1 ) );
+
+        TweenLite.set( _imgDropReflects, {
+            css: { autoAlpha: alpha }
+        });
+        
     }
 
     function _onResize() {

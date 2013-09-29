@@ -97,7 +97,7 @@ var NormalMapEffect = ( function NormalMapEffect() {
 
 				dot = dx * vx + dy * vy + dz * vz;
 				spec = Math.pow( dot, 20 ) * specularity;
-				intensity = spec + 0.5;
+				intensity = spec + .9; // RESPECT DES COULEURS DE BASE
 
 				for( idxChannel = 0; idxChannel < 3; idxChannel++ ) {
 					data[ idxData ] = Math.round( _clamp( _dataTexture[ idxData++ ] * intensity, 0, 255 ) );
