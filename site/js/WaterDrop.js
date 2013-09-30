@@ -67,8 +67,6 @@ var WaterDrop = WaterDrop || ( function WaterDrop() {
         var cx = e.clientX - ( _winW - 130 ) * .5 + 260
         ,   cy = e.clientY - ( 405 - 160 ) * .5;
 
-        console.log( cx, cy );
-
         _normalMapEffect.apply( cx, cy, 500 );
 
         var dx = ( e.clientX - _winW * .5 )
