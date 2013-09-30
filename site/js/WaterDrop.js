@@ -14,7 +14,6 @@ var WaterDrop = WaterDrop || ( function WaterDrop() {
 
     function _init() {
         _imgDropBg = document.getElementById( "drop_bg" );
-        // _imgDropReflects = document.getElementById( "drop_reflects" );
         _cntDrop = document.getElementById( "cnt-drop" );
 
         _w = _imgDropBg.offsetWidth;
@@ -46,7 +45,6 @@ var WaterDrop = WaterDrop || ( function WaterDrop() {
         _canvas.className = "drop";
 
         _cntDrop.removeChild( _imgDropBg );
-        // _cntDrop.insertBefore( _canvas, _imgDropReflects );
         _cntDrop.appendChild( _canvas );
     }
 
@@ -67,17 +65,14 @@ var WaterDrop = WaterDrop || ( function WaterDrop() {
 
     function _render( e ) {
         var cx = e.clientX - ( _winW - 130 ) * .5 + 260
-        ,   cy = e.clientY - ( _winH - 160 ) * .5;
+        ,   cy = e.clientY - ( 405 - 160 ) * .5;
+
+        console.log( cx, cy );
 
         _normalMapEffect.apply( cx, cy, 500 );
 
         var dx = ( e.clientX - _winW * .5 )
-        ,   alpha = Math.max( 0, Math.min( dx < 0 ? 0 : dx / 300, 1 ) );
-
-        // TweenLite.set( _imgDropReflects, {
-        //     css: { autoAlpha: alpha }
-        // });
-        
+        ,   alpha = Math.max( 0, Math.min( dx < 0 ? 0 : dx / 300, 1 ) );        
     }
 
     function _onResize() {
