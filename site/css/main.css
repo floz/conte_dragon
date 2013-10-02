@@ -117,3 +117,14 @@ html, body {
   font-family: 'archiveregular';
   font-size: 18px;
 }
+
+
+.storm {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  display: none;
+}
