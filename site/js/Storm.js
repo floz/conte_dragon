@@ -60,6 +60,6 @@ var Storm = Storm || ( function Storm() {
 		_start();
 	}
 
-	$( document ).ready( _init );
+	// $( document ).ready( _init );
 
 })();
