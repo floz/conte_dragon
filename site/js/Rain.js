@@ -39,9 +39,9 @@ var Rain = Rain || ( function Rain() {
 	function _createDrops() {
 		var drop = null
 		,	i = 0
-		,	n = Math.floor( Math.random() * 8 + 2 )
+		,	n = Math.floor( Math.random() * 1 + 1 );//Math.random() * 12 + 4 )
 		for( ; i < n; i++ ) {
-			drop = new RainDrop( _w, _h );
+			drop = new RainDrop( _w, _h, Math.random() > .75 );
 			_drops.push( drop );
 		}
 
@@ -49,7 +49,7 @@ var Rain = Rain || ( function Rain() {
 	}
 
 	function _startTimer() {
-		_timeout = setTimeout( _createDrops, 100 + Math.random() * 500 );
+		_timeout = setTimeout( _createDrops, Math.random() * 30 );//100 + Math.random() * 500 );
 	}
 
 	function _stopTimer() {
@@ -96,14 +96,18 @@ var RainDrop = ( function RainDrop() {
 	RainDrop.prototype.speed = 0.0;
 	RainDrop.prototype.speedMax = 0.0;
 
-	function RainDrop( zoneW, zoneH ) {
+	function RainDrop( zoneW, zoneH, isBackground ) {
 		this.x = Math.random() * zoneW;
 		this.y = -100.0;
 
-		this.w = 1.0 + Math.random() * 2.0;
-
 		this.hMax = rainData.h + Math.random() * rainData.hInterval;
-		this.speedMax = rainData.speed + Math.random() * rainData.speedInterval;
+		if( isBackground ) {
+			this.speedMax = 10 + Math.random() * 15;
+			this.w = 1.0;
+		} else {
+			this.speedMax = 18 + Math.random() * 32;
+			this.w = 2.0 + Math.random() * 2.0;
+		}
 	}
 	RainDrop.prototype.constructor = RainDrop;
 	

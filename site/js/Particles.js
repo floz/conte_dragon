@@ -70,17 +70,17 @@ var Particles = Particles || ( function Particles() {
 			_ctx.shadowColor = "rgba( 0, 0, 0, .5 )";
 			_ctx.shadowBlur = 20;
 			_ctx.lineWidth = 1;
-			_ctx.strokeStyle = "rgba( 255, 255, 255, " + particle.alpha * .025 + " )"
+			_ctx.strokeStyle = "rgba( 255, 255, 255, " + particle.alpha * .01 + " )"
 
 			_ctx.beginPath();
 			_ctx.arc( particle.x, particle.y, particle.rad, 0, 2 * Math.PI, false );
 			_ctx.closePath();
 			_ctx.fill();
 
-			// _ctx.beginPath();
-			// _ctx.arc( particle.x, particle.y, particle.rad - .5, 0, 2 * Math.PI, false );
-			// _ctx.closePath();
-			// _ctx.stroke();
+			_ctx.beginPath();
+			_ctx.arc( particle.x, particle.y, particle.rad - .5, 0, 2 * Math.PI, false );
+			_ctx.closePath();
+			_ctx.stroke();
 
 			if( particle.alpha <= 0 ) {
 				_particles.splice( i, 1 );
@@ -115,8 +115,9 @@ var Particle = ( function Particle() {
 	function Particle( zoneW, zoneH ) {
 		var isCentered = Math.random() < .8;
 		if ( isCentered ) {
-			this.x = zoneW * .5 + Math.random() * 500 - 250;
+			this.x = Math.random() * zoneW;
 			this.y = 500 + Math.random() * 200 - 100;
+			this.rad = 10 + Math.random() * 15;
 
 			this.speed = .05 + Math.random() * .15;
 		} else {
@@ -125,10 +126,11 @@ var Particle = ( function Particle() {
 
 			this.speed = .025 + Math.random() * .05;
 
+			this.rad = 15 + Math.random() * 30;
+
 			this.isBlurry = true;
 		}
 
-		this.rad = 10 + Math.random() * 30;
 		this._color = ParticleColors[ Math.random() * ParticleColors.length >> 0 ];
 
 		this.orientation = Math.random() * Math.PI * 2;
