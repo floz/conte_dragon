@@ -155,6 +155,7 @@ var Particle = ( function Particle() {
 })();
 
 var ParticleColors = [ 
-	{ r: 38, g: 237, b: 255, a: .07 }
-,	{ r: 255, g: 75, b: 113, a: .1 }	
+	{ r: 38, g: 237, b: 255, a: .05 }
+,	{ r: 255, g: 75, b: 113, a: .07 }
+,	{ r: 38, g: 175, b: 255, a: .05 }
 ];
