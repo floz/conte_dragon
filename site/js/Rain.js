@@ -39,7 +39,7 @@ var Rain = Rain || ( function Rain() {
 	function _createDrops() {
 		var drop = null
 		,	i = 0
-		,	n = Math.floor( Math.random() * 4 + 2 )
+		,	n = Math.floor( Math.random() * 8 + 2 )
 		for( ; i < n; i++ ) {
 			drop = new RainDrop( _w, _h );
 			_drops.push( drop );
@@ -68,7 +68,7 @@ var Rain = Rain || ( function Rain() {
 
 			linear = _ctx.createLinearGradient( 0, drop.y, 0, drop.y + drop.h );
 			linear.addColorStop( 0, "rgba( 255, 255, 255, .025 )" );
-			linear.addColorStop( .85, "rgba( 255, 255, 255, .5 )" );
+			linear.addColorStop( .85, "rgba( 255, 255, 255, .3 )" );
 			linear.addColorStop( 1, "rgba( 255, 255, 255, .015 )" );
 
 			_ctx.fillStyle = linear;
@@ -121,6 +121,6 @@ var RainDrop = ( function RainDrop() {
 var rainData = {
 		speed: 18.0
 	,	speedInterval: 32.0
-	, 	h: 50.0
-	,	hInterval: 300.0
+	, 	h: 100.0
+	,	hInterval: 450.0
 }
