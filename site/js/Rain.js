@@ -9,7 +9,9 @@ var Rain = Rain || ( function Rain() {
 	,	_drops = null
 
 	,	_timeout = -1
-	,	_raf = -1;
+	,	_raf = -1
+
+	,	_started = false;
 
 	function _init() {
 		_cntRain = document.getElementById( "cnt-rain" );
@@ -17,6 +19,9 @@ var Rain = Rain || ( function Rain() {
 		_cntRain.appendChild( _canvas );
 
 		_start();
+
+		$( window ).on( "blur", _onBlur )
+				   .on( "focus", _onFocus );
 	}
 
 	function _createCanvas() {
@@ -48,7 +53,20 @@ var Rain = Rain || ( function Rain() {
 		_startTimer();
 	}
 
+	function _onBlur() {
+		_started = false;
+		_stopTimer();
+	}
+
+	function _onFocus() {
+		if ( _started ) {
+			return;
+		}
+		_startTimer();
+	}
+
 	function _startTimer() {
+		_started = true;
 		_timeout = setTimeout( _createDrops, Math.random() * 30 );//100 + Math.random() * 500 );
 	}
 
@@ -67,9 +85,9 @@ var Rain = Rain || ( function Rain() {
 			drop.update();
 
 			linear = _ctx.createLinearGradient( 0, drop.y, 0, drop.y + drop.h );
-			linear.addColorStop( 0, "rgba( 255, 255, 255, .025 )" );
-			linear.addColorStop( .85, "rgba( 255, 255, 255, .3 )" );
-			linear.addColorStop( 1, "rgba( 255, 255, 255, .015 )" );
+			linear.addColorStop( 0, "rgba( 255, 255, 255, " + .025 * drop.alpha + " )" );
+			linear.addColorStop( .85, "rgba( 255, 255, 255, " + .3 * drop.alpha + " )" );
+			linear.addColorStop( 1, "rgba( 255, 255, 255,  " +  .015 * drop.alpha + " )" );
 
 			_ctx.fillStyle = linear;
 			_ctx.fillRect( drop.x, drop.y, drop.w, drop.h );
@@ -91,6 +109,7 @@ var RainDrop = ( function RainDrop() {
 	RainDrop.prototype.y = 0.0;
 	RainDrop.prototype.w = 0.0;
 	RainDrop.prototype.h = 0.0;
+	RainDrop.prototype.alpha = 1.0;
 
 	RainDrop.prototype.hMax = 0.0;
 	RainDrop.prototype.speed = 0.0;
@@ -104,9 +123,11 @@ var RainDrop = ( function RainDrop() {
 		if( isBackground ) {
 			this.speedMax = 10 + Math.random() * 15;
 			this.w = 1.0;
+			this.alpha = .4 + Math.random() * .2;
 		} else {
 			this.speedMax = 18 + Math.random() * 32;
 			this.w = 2.0 + Math.random() * 2.0;
+			this.alpha = .8 + Math.random() * .2;
 		}
 	}
 	RainDrop.prototype.constructor = RainDrop;

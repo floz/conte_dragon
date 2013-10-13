@@ -46,14 +46,17 @@ var Particles = Particles || ( function Particles() {
 			_particles.push( particle );
 		}
 
+		console.log( _particles.length );
 		_startTimer();
 	}
 
 	function _startTimer() {
+		console.log( "startTimer" );
 		_timeout = setTimeout( _createParticles, 500 + Math.random() * 2000 );
 	}
 
 	function _stopTimer() {
+		console.log( "particles stop timer", _timeout );
 		clearTimeout( _timeout );
 	}
 
@@ -70,7 +73,7 @@ var Particles = Particles || ( function Particles() {
 			_ctx.shadowColor = "rgba( 0, 0, 0, .5 )";
 			_ctx.shadowBlur = 20;
 			_ctx.lineWidth = 1;
-			_ctx.strokeStyle = "rgba( 255, 255, 255, " + particle.alpha * .01 + " )"
+			_ctx.strokeStyle = "rgba( 255, 255, 255, " + particle.alpha * .015 + " )"
 
 			_ctx.beginPath();
 			_ctx.arc( particle.x, particle.y, particle.rad, 0, 2 * Math.PI, false );
@@ -82,7 +85,7 @@ var Particles = Particles || ( function Particles() {
 			_ctx.closePath();
 			_ctx.stroke();
 
-			if( particle.alpha <= 0 ) {
+			if( particle.isDead ) {
 				_particles.splice( i, 1 );
 			}
 		}
@@ -112,10 +115,12 @@ var Particle = ( function Particle() {
 	Particle.prototype._sin = 0.0;
 	Particle.prototype._lifeTime = 200;
 
+	Particle.prototype.isDead = false;
+
 	function Particle( zoneW, zoneH ) {
 		var isCentered = Math.random() < .8;
 		if ( isCentered ) {
-			this.x = Math.random() * zoneW;
+			this.x = zoneW * .5 + Math.random() * 450 - 225;
 			this.y = 500 + Math.random() * 200 - 100;
 			this.rad = 10 + Math.random() * 15;
 
@@ -144,9 +149,12 @@ var Particle = ( function Particle() {
 		this.y += this.speed * this._sin;
 
 		if( this._lifeTime > 0 ) {
-			this.alpha += ( 1 - this.alpha ) * ( .02 * Math.random() );
+			this.alpha += ( 1 - this.alpha ) * ( .05 * Math.random() );
 		} else {
-			this.alpha += ( 0 - this.alpha ) * ( .01 * Math.random() );
+			this.alpha += ( -0.05 - this.alpha ) * ( .025 * Math.random() );
+			if( this.alpha <= 0 ) {
+				this.isDead = true;
+			}
 		}
 		this.fillColor = "rgba( " + this._color.r + ", " + this._color.g + ", " + this._color.b + ", " + this._color.a * this.alpha + ");";
 		this._lifeTime -= 1;
