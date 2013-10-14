@@ -18,11 +18,14 @@
     <script src="js/vendors/greensock/plugins/CSSPlugin.min.js"></script>
     <script src="js/vendors/greensock/TweenLite.min.js"></script>
     <script src="js/vendors/Stats.js"></script>
-    <script src="js/NormalMapEffect.js"></script>
+    <script src="js/ResizeManager.js"></script>
+    <script src="js/FocusManager.js"></script>
+    <script src="js/Effects.js"></script>
+    <script src="js/Particles.js"></script>
     <script src="js/Rain.js"></script>
+    <script src="js/NormalMapEffect.js"></script>
     <script src="js/WaterDrop.js"></script>
     <script src="js/Storm.js"></script>
-    <script src="js/Particles.js"></script>
     <script src="js/Main.js"></script>
   </head>
 
@@ -31,8 +34,7 @@
     <div class="main">
       <div class="main__background"></div>
 
-      <div id="cnt-rain" class="main__rain"></div>
-      <div id="cnt-particles" class="main__particles"></div>
+      <div id="cnt-effects" class="main__effects"></div>
 
       <div class="main__content">
         <div class="title">
@@ -59,14 +61,24 @@
           </span>
           <span class="bt-play__title">
             <span class="bt-play__title__head asiat">遊ぶ</span>
-            <span class="bt-play__title__content">PLAY</span>
+            <span class="bt-play__title__content">SOON</span>
+          </span>
+          <span class="bt-play__particles">
+            <span id="bt-play__particle--big" class="bt-play__particle bt-play__particle--big"></span>
+            <span id="bt-play__particle--small"class="bt-play__particle bt-play__particle--small"></span>
           </span>
         </a>
+
+        <!-- <div class="teaser">Coming Soon</div> -->
       </div>
 
 
       <div id="storm" class="storm"></div>
     </div>
+
+    <!-- <audio autoplay="true" loop="0">
+      <source src="mp3/rain-03.mp3" type="audio/mpeg">
+    </audio> -->
 
     <!--<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>-->
 

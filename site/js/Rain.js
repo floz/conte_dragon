@@ -1,9 +1,6 @@
 var Rain = Rain || ( function Rain() {
 
-	var _cntRain = null
-	,	_canvas = null
-	,	_ctx = null
-	,	_w = -1
+	var _w = -1
 	,	_h = -1
 
 	,	_drops = null
@@ -14,31 +11,19 @@ var Rain = Rain || ( function Rain() {
 	,	_started = false;
 
 	function _init() {
-		_cntRain = document.getElementById( "cnt-rain" );
-		_createCanvas();
-		_cntRain.appendChild( _canvas );
+		_w = ResizeManager.getWidth();
+		_h = ResizeManager.getHeight();
 
 		_start();
 
-		$( window ).on( "blur", _onBlur )
-				   .on( "focus", _onFocus );
-	}
-
-	function _createCanvas() {
-		_w = window.innerWidth;
-		_h = window.innerHeight;
-
-		_canvas = document.createElement( "canvas" );
-		_canvas.width = _w;
-		_canvas.height = _h;
-		_ctx = _canvas.getContext( "2d" );
+		Effects.register( _onUpdate )
+		FocusManager.register( _onFocus, _onBlur );
+		ResizeManager.register( _onResize );
 	}
 
 	function _start() {
 		_drops = [];
-
 		_createDrops();
-		_update();
 	}
 
 	function _createDrops() {
@@ -53,11 +38,6 @@ var Rain = Rain || ( function Rain() {
 		_startTimer();
 	}
 
-	function _onBlur() {
-		_started = false;
-		_stopTimer();
-	}
-
 	function _onFocus() {
 		if ( _started ) {
 			return;
@@ -70,13 +50,16 @@ var Rain = Rain || ( function Rain() {
 		_timeout = setTimeout( _createDrops, Math.random() * 30 );//100 + Math.random() * 500 );
 	}
 
+	function _onBlur() {
+		_started = false;
+		_stopTimer();
+	}
+
 	function _stopTimer() {
 		clearTimeout( _timeout );
 	}
 
-	function _update() {
-		_ctx.clearRect( 0, 0, _w, _h );
-
+	function _onUpdate( ctx ) {
 		var drop = null
 		,	linear = null
 		,	i = _drops.length;
@@ -84,19 +67,22 @@ var Rain = Rain || ( function Rain() {
 			drop = _drops[ i ];
 			drop.update();
 
-			linear = _ctx.createLinearGradient( 0, drop.y, 0, drop.y + drop.h );
+			linear = ctx.createLinearGradient( 0, drop.y, 0, drop.y + drop.h );
 			linear.addColorStop( 0, "rgba( 255, 255, 255, " + .025 * drop.alpha + " )" );
 			linear.addColorStop( .85, "rgba( 255, 255, 255, " + .3 * drop.alpha + " )" );
 			linear.addColorStop( 1, "rgba( 255, 255, 255,  " +  .015 * drop.alpha + " )" );
 
-			_ctx.fillStyle = linear;
-			_ctx.fillRect( drop.x, drop.y, drop.w, drop.h );
+			ctx.fillStyle = linear;
+			ctx.fillRect( drop.x, drop.y, drop.w, drop.h );
 
 			if( drop.y > _h + drop.h )
 				_drops.splice( i, 1 );
 		}
+	}
 
-		_raf = requestAnimationFrame( _update );
+	function _onResize( w, h ) {
+		_w = w;
+		_h = h;
 	}
 
 	$( document ).ready( _init );

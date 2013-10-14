@@ -1,96 +1,104 @@
 var Particles = Particles || ( function Particles() {
 
-	var _cntParticles = null
-	,	_canvas = null
-	,	_ctx = null
-	,	_w = null
+	var _w = null
 	,	_h = null
 
 	,	_particles = null
 
 	,	_timeout = -1
-	,	_raf = -1;
+	,	_raf = -1
+
+	,	_started = false;
 
 	function _init() {
-		_cntParticles = document.getElementById( "cnt-particles" );
-		_createCanvas();
-		_cntParticles.appendChild( _canvas );
+		_w = ResizeManager.getWidth();
+		_h = ResizeManager.getHeight();
 
 		_start();
-	}
 
-	function _createCanvas() {
-		_w = window.innerWidth;
-		_h = window.innerHeight;
-
-		_canvas = document.createElement( "canvas" );
-		_canvas.width = _w;
-		_canvas.height = _h;
-		_ctx = _canvas.getContext( "2d" );
-		_ctx.globalCompositionOperation = "lighter";
+		Effects.register( _onUpdate )
+		FocusManager.register( _onFocus, _onBlur );
+		ResizeManager.register( _onResize );
 	}
 
 	function _start() {
 		_particles = [];
-
 		_createParticles();
-		_update();
 	}
 
 	function _createParticles() {
 		var particle = null
 		,	i = 0
-		,	n = Math.floor( Math.random() * 4 + 2 );
+		,	n = Math.floor( Math.random() * 3 + 1 );
 		for( ; i < n; i++ ) {
-			particle = new Particle( _w, _h );
+			particle = new Particle( _w, _h, true );
 			_particles.push( particle );
 		}
 
-		console.log( _particles.length );
+		i = 0;
+		n = Math.floor( Math.random() * 3 + 1 );
+		for( ; i < n; i++ ) {
+			particle = new Particle( _w, _h, false );
+			_particles.push( particle );
+		}
+
+		_startTimer();
+	}
+
+	function _onFocus() {
+		if ( _started ) {
+			return;
+		}
 		_startTimer();
 	}
 
 	function _startTimer() {
-		console.log( "startTimer" );
+		_started = true;
 		_timeout = setTimeout( _createParticles, 500 + Math.random() * 2000 );
 	}
 
+	function _onBlur() {
+		_started = false;
+		_stopTimer();
+	}
+
 	function _stopTimer() {
-		console.log( "particles stop timer", _timeout );
 		clearTimeout( _timeout );
 	}
 
-	function _update() {
-		_ctx.clearRect( 0, 0, _w, _h );
-
+	function _onUpdate( ctx ) {
+		// return;
 		var particle = null
 		,	i = _particles.length;
 		while( --i > -1 ) {
 			particle = _particles[ i ];
 			particle.update();
 
-			_ctx.fillStyle = particle.fillColor;
-			_ctx.shadowColor = "rgba( 0, 0, 0, .5 )";
-			_ctx.shadowBlur = 20;
-			_ctx.lineWidth = 1;
-			_ctx.strokeStyle = "rgba( 255, 255, 255, " + particle.alpha * .015 + " )"
+			ctx.fillStyle = particle.fillColor;
+			// ctx.shadowColor = "rgba( 0, 0, 0, .5 )";
+			// ctx.shadowBlur = 20;
+			ctx.lineWidth = 1;
+			ctx.strokeStyle = "rgba( 255, 255, 255, " + particle.alpha * .015 + " )"
 
-			_ctx.beginPath();
-			_ctx.arc( particle.x, particle.y, particle.rad, 0, 2 * Math.PI, false );
-			_ctx.closePath();
-			_ctx.fill();
+			ctx.beginPath();
+			ctx.arc( particle.x, particle.y, particle.rad, 0, 2 * Math.PI, false );
+			ctx.closePath();
+			ctx.fill();
 
-			_ctx.beginPath();
-			_ctx.arc( particle.x, particle.y, particle.rad - .5, 0, 2 * Math.PI, false );
-			_ctx.closePath();
-			_ctx.stroke();
+			ctx.beginPath();
+			ctx.arc( particle.x, particle.y, particle.rad - .5, 0, 2 * Math.PI, false );
+			ctx.closePath();
+			ctx.stroke();
 
 			if( particle.isDead ) {
 				_particles.splice( i, 1 );
 			}
 		}
+	}
 
-		_raf = requestAnimationFrame( _update );
+	function _onResize( w, h ) {
+		_w = w;
+		_h = h;
 	}
 
 	$( document ).ready( _init );
@@ -114,14 +122,14 @@ var Particle = ( function Particle() {
 	Particle.prototype._cos = 0.0;
 	Particle.prototype._sin = 0.0;
 	Particle.prototype._lifeTime = 200;
+	Particle.prototype._realAlpha = 1.0;
 
 	Particle.prototype.isDead = false;
 
-	function Particle( zoneW, zoneH ) {
-		var isCentered = Math.random() < .8;
+	function Particle( zoneW, zoneH, isCentered ) {
 		if ( isCentered ) {
 			this.x = zoneW * .5 + Math.random() * 450 - 225;
-			this.y = 500 + Math.random() * 200 - 100;
+			this.y = 500 + Math.random() * 150 - 75;
 			this.rad = 10 + Math.random() * 15;
 
 			this.speed = .05 + Math.random() * .15;
@@ -131,7 +139,8 @@ var Particle = ( function Particle() {
 
 			this.speed = .025 + Math.random() * .05;
 
-			this.rad = 15 + Math.random() * 30;
+			this.rad = 40 + Math.random() * 200;
+			this._realAlpha = .1 + Math.random() * .25;
 
 			this.isBlurry = true;
 		}
@@ -156,7 +165,7 @@ var Particle = ( function Particle() {
 				this.isDead = true;
 			}
 		}
-		this.fillColor = "rgba( " + this._color.r + ", " + this._color.g + ", " + this._color.b + ", " + this._color.a * this.alpha + ");";
+		this.fillColor = "rgba( " + this._color.r + ", " + this._color.g + ", " + this._color.b + ", " + this._color.a * this.alpha * this._realAlpha + ");";
 		this._lifeTime -= 1;
 	}
 

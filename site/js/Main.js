@@ -1,6 +1,11 @@
 var Main = ( function Main() {
 
 	function Main() {
+		// _debugMode();
+	}
+	Main.prototype.constructor = Main;
+
+	function _debugMode() {
 		var stats = new Stats();
 		stats.setMode(0); // 0: fps, 1: ms
 
@@ -20,7 +25,6 @@ var Main = ( function Main() {
 
 		}, 1000 / 60 );
 	}
-	Main.prototype.constructor = Main;
 
 	return Main;
 
