@@ -20,17 +20,29 @@ init = ->
 
     scene = new THREE.Scene()
 
+    ambient = new THREE.AmbientLight( 0x101010 );
+    scene.add( ambient );
+
+    directionalLight = new THREE.DirectionalLight( 0xffffff )
+    directionalLight.position.set( 1, 1, 2 ).normalize()
+    scene.add directionalLight
+
+    pointLight = new THREE.PointLight( 0xffffff )
+    scene.add( pointLight );
+
     dragon = new Dragon()
     console.log dragon
     scene.add dragon
 
-    do animate
+    animate()
 
 animate = ->
-    dragon.rotation.x = 10
+    dragon.rotation.x = 45
+    dragon.update()
 
     renderer.render scene, camera
 
     requestAnimationFrame animate
 
-do init
+$( document ).ready ->
+    init()
