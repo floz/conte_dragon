@@ -7,7 +7,7 @@ class Dragon extends THREE.Mesh
     _indexes: null
 
     constructor: ->
-        @_geometry = new THREE.CylinderGeometry 30, 30, 80, 6, 8, false
+        @_geometry = new THREE.CylinderGeometry 30, 30, 30, 6, 1, false
         @_texture = new THREE.MeshLambertMaterial color: 0xff00ff
         
         THREE.Mesh.call @, @_geometry, @_texture
@@ -44,6 +44,10 @@ class Dragon extends THREE.Mesh
 
         dy = stage.size.height *.5 - stage.mouse.y
         dy = @_constrain dy, 200
+
+        dz = -dy
+
+        dy *= .75
 
         val = .9
         for idx in @_indexes

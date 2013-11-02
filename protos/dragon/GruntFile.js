@@ -84,6 +84,7 @@ module.exports = function ( grunt ) {
             jade: {
                 compile: {
                     options: {
+                        pretty: true,
                         data: {
                             debug: true
                         }

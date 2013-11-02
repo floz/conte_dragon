@@ -8,8 +8,8 @@ class StageSingleton
 		_$window: null
 
 		constructor: ->
-			@mouse = {}
-			@size = {}
+			@mouse = { x: 0, y: 0 }
+			@size = { width: 0, height: 0 }
 			@_$window = $( window )
 
 			$( document ).on "mousemove", @_onMouseMove
