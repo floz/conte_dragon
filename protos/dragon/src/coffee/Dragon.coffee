@@ -1,3 +1,6 @@
+# http://stackoverflow.com/questions/1251828/calculate-rotations-to-look-at-a-3d-point
+# http://stackoverflow.com/questions/10236557/getting-quaternion-to-rotate-between-two-vectors
+
 class Dragon extends THREE.Mesh
 
     _geometry: null
